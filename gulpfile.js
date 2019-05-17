@@ -11,7 +11,8 @@ gulp.task('views', () => {
     return gulp.src('src/pug/*.pug')
         .pipe(pug({}))
         .pipe(gulp.dest('dist/'));
-});
+})
+;
 
 gulp.task('html', () => {
     return gulp.src('src/pug/*.pug')
@@ -22,40 +23,47 @@ gulp.task('html', () => {
             removeTagWhitespace: true
         }))
         .pipe(gulp.dest('dist/'));
-});
+})
+;
 
 gulp.task('images', () =>
-	gulp.src('src/img/*')
-		.pipe(imagemin())
-		.pipe(gulp.dest('dist/img/'))
-);
+gulp.src('src/img/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('dist/img/'))
+)
+;
 
 gulp.task('less', () => {
     return gulp.src('src/less/*.less')
         .pipe(less())
         .pipe(gulp.dest('dist/css/'));
-});
+})
+;
 
 gulp.task('copy', () => {
     return gulp.src('src/dist/**/*')
         .pipe(gulp.dest('dist/'));
-});
+})
+;
 
 gulp.task('css', () => {
     return gulp.src('src/less/*.less')
         .pipe(less())
         .pipe(cssnano())
         .pipe(gulp.dest('dist/css'));
-});
+})
+;
 
 gulp.task('clean', (cb) => {
-    return del.sync('dist',cb);
-});
+    return del.sync('dist', cb);
+})
+;
 
 gulp.task('watch', () => {
     return gulp.watch('src/**/*', ['views', 'css', 'images', 'copy']);
-});
+})
+;
 
-gulp.task('build', ['views', 'css', 'images', 'copy']);
+gulp.task('build',['views', 'css', 'images', 'copy']);
 gulp.task('cleanandbuild', ['clean', 'build']);
 gulp.task('default', ['cleanandbuild']);
